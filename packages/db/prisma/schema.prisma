@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // switch to "postgresql" for PG deployments
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String?
+  passwordHash String?
+  role         String        @default("TEACHER")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  courses      Course[]      @relation("TeacherCourses")
+  enrollments  Enrollment[]
+  submissions  Submission[]
+  activities   ActivityLog[]
+  files        FileAsset[]
+  examResults  ExamResult[]
+}
+
+model Course {
+  id           String          @id @default(cuid())
+  title        String
+  description  String?
+  teacherId    String
+  teacher      User            @relation("TeacherCourses", fields: [teacherId], references: [id])
+  createdAt    DateTime        @default(now())
+
+  enrollments  Enrollment[]
+  assignments  Assignment[]
+  exams        Exam[]
+  schedules    StudySchedule[]
+  files        FileAsset[]
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  courseId  String
+  studentId String
+  createdAt DateTime @default(now())
+
+  student   User     @relation(fields: [studentId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
+
+  @@unique([courseId, studentId])
+}
+
+model Assignment {
+  id           String      @id @default(cuid())
+  courseId     String
+  title        String
+  instructions String?
+  dueDate      DateTime?
+  createdAt    DateTime    @default(now())
+
+  course       Course      @relation(fields: [courseId], references: [id])
+  submissions  Submission[]
+}
+
+model Submission {
+  id           String     @id @default(cuid())
+  assignmentId String
+  studentId    String
+  submittedAt  DateTime   @default(now())
+  grade        Float?
+  feedback     String?
+
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  student      User       @relation(fields: [studentId], references: [id])
+}
+
+model Exam {
+  id        String        @id @default(cuid())
+  courseId  String
+  title     String
+  date      DateTime
+  createdAt DateTime      @default(now())
+
+  course    Course        @relation(fields: [courseId], references: [id])
+  results   ExamResult[]
+}
+
+model ExamResult {
+  id        String   @id @default(cuid())
+  examId    String
+  studentId String
+  score     Float
+  feedback  String?
+  createdAt DateTime @default(now())
+
+  exam      Exam     @relation(fields: [examId], references: [id])
+  student   User     @relation(fields: [studentId], references: [id])
+
+  @@unique([examId, studentId])
+}
+
+model StudySchedule {
+  id        String   @id @default(cuid())
+  courseId  String
+  topic     String
+  start     DateTime
+  end       DateTime
+  createdAt DateTime @default(now())
+
+  course    Course   @relation(fields: [courseId], references: [id])
+}
+
+model ActivityLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  route      String
+  method     String
+  ip         String?
+  userAgent  String?
+  status     Int
+  durationMs Int?
+  metadata   String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id])
+}
+
+model FileAsset {
+  id          String   @id @default(cuid())
+  userId      String?
+  courseId    String?
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  path        String
+  createdAt   DateTime @default(now())
+
+  user        User?    @relation(fields: [userId], references: [id])
+  course      Course?  @relation(fields: [courseId], references: [id])
+}
