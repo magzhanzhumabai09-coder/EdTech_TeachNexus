@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b1020;
+  --bg-light: #0f1530;
+}
+
+body {
+  @apply bg-white text-gray-900 dark:bg-[color:var(--bg)] dark:text-gray-100;
+}
+
+.glass {
+  @apply bg-white/10 dark:bg-white/5 backdrop-blur-md shadow-glass border border-white/20;
+}
+
+.gradient-hero {
+  background: radial-gradient(circle at 20% -20%, rgba(99,102,241,0.35), transparent 35%),
+              radial-gradient(circle at 80% -10%, rgba(236,72,153,0.35), transparent 35%),
+              radial-gradient(circle at 50% 120%, rgba(56,189,248,0.25), transparent 35%),
+              linear-gradient(180deg, rgba(255,255,255,0.05), transparent);
+}
