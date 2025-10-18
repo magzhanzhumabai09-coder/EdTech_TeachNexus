@@ -13,8 +13,8 @@ export default function Analytics() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-navy-800">Monitoring & Analytics</h1>
         <div className="flex gap-2">
-          <button className="btn btn-secondary">Export</button>
-          <button className="btn btn-primary">Generate Report</button>
+          <button className="btn btn-secondary" onClick={() => alert('Exporting CSV... (placeholder)')}>Export</button>
+          <button className="btn btn-primary" onClick={() => alert('Generating report PDF... (placeholder)')}>Generate Report</button>
         </div>
       </div>
 

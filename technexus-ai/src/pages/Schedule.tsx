@@ -35,8 +35,8 @@ export default function Schedule() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-navy-800">Study Schedule</h1>
         <div className="flex gap-2">
-          <button className="btn btn-secondary">Sync Calendar</button>
-          <button className="btn btn-primary">AI Auto-Schedule</button>
+          <button className="btn btn-secondary" onClick={() => alert('Connecting to Google Calendar... (placeholder)')}>Sync Calendar</button>
+          <button className="btn btn-primary" onClick={() => alert('Auto-scheduling with constraints... (placeholder)')}>AI Auto-Schedule</button>
         </div>
       </div>
 

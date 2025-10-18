@@ -32,7 +32,7 @@ export function Sidebar({ collapsed }: { collapsed: boolean }) {
       <div className="p-3">
         <div className="card">
           <p className="text-sm text-slate-600">Upgrade to <span className="font-semibold">Pro</span> for advanced analytics.</p>
-          <button className="btn btn-primary w-full mt-3">Upgrade</button>
+          <button className="btn btn-primary w-full mt-3" onClick={() => alert('Upgrade flow (placeholder)')}>Upgrade</button>
         </div>
       </div>
     </aside>

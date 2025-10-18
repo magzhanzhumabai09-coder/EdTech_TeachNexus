@@ -24,7 +24,7 @@ export default function Syllabus() {
         <div className="flex gap-2">
           <input value={newTopic} onChange={e => setNewTopic(e.target.value)} placeholder="Add topic..." className="input flex-1" />
           <button className="btn btn-primary" onClick={addTopic}>Add</button>
-          <button className="btn btn-secondary">AI Suggest</button>
+          <button className="btn btn-secondary" onClick={() => alert('AI suggests topics (placeholder)')}>AI Suggest</button>
         </div>
         <ul className="space-y-2">
           {topics.map((t, i) => (

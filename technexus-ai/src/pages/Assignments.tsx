@@ -15,7 +15,7 @@ export default function Assignments() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-navy-800">Assignments</h1>
         <div className="flex gap-2">
-          <button className="btn btn-secondary">Import</button>
+          <button className="btn btn-secondary" onClick={() => alert('Import dialog (placeholder)')}>Import</button>
           <button className="btn btn-primary" onClick={createAssignment}>Create</button>
         </div>
       </div>

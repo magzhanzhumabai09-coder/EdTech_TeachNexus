@@ -12,7 +12,7 @@ export function Header({ onToggleSidebar }: { onToggleSidebar: () => void }) {
           <Link to="/" className="font-semibold text-navy-700">TechNexus.Ai</Link>
         </div>
         <div className="flex items-center gap-3">
-          <button className="btn btn-ghost rounded-full" aria-label="Notifications">
+          <button className="btn btn-ghost rounded-full" aria-label="Notifications" onClick={() => alert('Notifications panel (placeholder)')}>
             <BellIcon className="h-6 w-6" />
           </button>
           <img src="https://i.pravatar.cc/40" alt="avatar" className="h-9 w-9 rounded-full ring-2 ring-sky-200" />
